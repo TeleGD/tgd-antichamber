@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool isCrouched = false;
 
+	public float sensitivity = 10f;
+
     private void Start()
     {
         body = GetComponent<Rigidbody>();
@@ -29,8 +31,8 @@ public class PlayerController : MonoBehaviour
     void LateUpdate()
     {
         //entrée souris
-        viewAngle.x += Input.GetAxis("Mouse X");
-        viewAngle.y = Mathf.Clamp(viewAngle.y - Input.GetAxis("Mouse Y"), -80, 80);
+        viewAngle.x += Input.GetAxis("Mouse X")*sensitivity;
+        viewAngle.y = Mathf.Clamp(viewAngle.y - Input.GetAxis("Mouse Y")*sensitivity, -80, 80);
 
         //rotation de la vue
         transform.GetChild(0).localEulerAngles = new Vector3(viewAngle.y, 0, 0);

@@ -1652,6 +1652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 8
+  sensitivity: 1.5
 --- !u!4 &966169124
 Transform:
   m_ObjectHideFlags: 0

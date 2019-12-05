@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flashlight : MonoBehaviour
 {
     private Transform view;
+	private int flashlightSpeed = 10;
 
     void Start()
     {
@@ -22,6 +23,6 @@ public class Flashlight : MonoBehaviour
         else
             targetRot = view.rotation;
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.deltaTime * 6);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.deltaTime * flashlightSpeed);
     }
 }
