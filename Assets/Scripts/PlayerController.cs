@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody body;
 
 	private bool isCrouched = false;
+	private float canJump = 0f;
 
 	public float sensitivity = 10f;
+
 
     private void Start()
     {
@@ -21,11 +23,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		float yVel = body.velocity.y;
+		Vector3 dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         dir = dir.sqrMagnitude > 1 ? dir.normalized : dir;
         dir *= walkSpeed;
         dir = transform.rotation * dir;
-        body.velocity = dir;
+		dir += Vector3.up * yVel;
+		body.velocity = dir;
     }
 
     void LateUpdate()
@@ -43,7 +47,13 @@ public class PlayerController : MonoBehaviour
 			Crouch();
 		}
 
-        if(Input.GetKeyDown(KeyCode.LeftAlt)) {
+		if (Input.GetButtonDown("Jump") && Time.time > canJump)
+		{
+			Jump();
+			canJump = Time.time + 1f;
+		}
+
+		if (Input.GetKeyDown(KeyCode.LeftAlt)) {
             Cursor.visible = !Cursor.visible;
         }
     }
@@ -80,5 +90,12 @@ public class PlayerController : MonoBehaviour
 
 			isCrouched = true;
 		}
+	}
+
+	public void Jump()
+	{
+		Debug.Log("there");
+		//this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 50, 0));
+		body.velocity += Vector3.up*5f;
 	}
 }
