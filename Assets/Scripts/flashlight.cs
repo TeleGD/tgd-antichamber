@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class flashlight : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Rigidbody player;
     void Start()
     {
         
