@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public void RotatePlayer(float amount)
     {
         viewAngle.x += amount;
+        FindObjectOfType<Flashlight>().transform.eulerAngles += Vector3.up * amount;
     }
 
 	public void Crouch()
