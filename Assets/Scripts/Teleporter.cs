@@ -6,15 +6,19 @@ public class Teleporter : MonoBehaviour
 {
     public Vector3 offset;
     public float angle;
+    public MeshRenderer viewCondition;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
-            other.transform.position = RotatePointAroundPivot(other.transform.position, transform.position, Vector3.down * angle);
-            other.transform.position += offset;
-            other.GetComponent<PlayerController>().RotatePlayer(angle);
-        }
+        if(other.CompareTag("Player") && !(viewCondition != null && viewCondition.isVisible))
+            TeleportPlayer(other.transform);
+    }
+
+    private void TeleportPlayer(Transform p)
+    {
+        p.position = RotatePointAroundPivot(p.position, transform.position, Vector3.down * angle);
+        p.position += offset;
+        p.GetComponent<PlayerController>().RotatePlayer(angle);
     }
 
     public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)

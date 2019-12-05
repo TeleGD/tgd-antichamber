@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+        Cursor.visible = false;
     }
 
     private void FixedUpdate()
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
         body.velocity = dir;
     }
 
-    void Update()
+    void LateUpdate()
     {
         //entrée souris
         viewAngle.x += Input.GetAxis("Mouse X");
@@ -32,6 +33,10 @@ public class PlayerController : MonoBehaviour
         //rotation de la vue
         transform.GetChild(0).localEulerAngles = new Vector3(viewAngle.y, 0, 0);
         transform.eulerAngles = new Vector3(0, viewAngle.x, 0);
+
+        if(Input.GetKeyDown(KeyCode.LeftAlt)) {
+            Cursor.visible = !Cursor.visible;
+        }
     }
 
     public void RotatePlayer(float amount)
