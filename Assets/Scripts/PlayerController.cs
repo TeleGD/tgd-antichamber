@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 viewAngle;
     private Rigidbody body;
 
+	private bool isCrouched = false;
+
     private void Start()
     {
         body = GetComponent<Rigidbody>();
@@ -32,10 +34,43 @@ public class PlayerController : MonoBehaviour
         //rotation de la vue
         transform.GetChild(0).localEulerAngles = new Vector3(viewAngle.y, 0, 0);
         transform.eulerAngles = new Vector3(0, viewAngle.x, 0);
-    }
+
+		if (Input.GetButtonDown("Crouch"))
+		{
+			Crouch();
+		}
+	}
 
     public void RotatePlayer(float amount)
     {
         viewAngle.x += amount;
     }
+
+	public void Crouch()
+	{
+		if (isCrouched)
+		{
+			this.transform.position += Vector3.up * 0.45f;
+
+			this.gameObject.GetComponent<CapsuleCollider>().height += 0.9f;
+
+			Vector3 cameraPos = this.transform.Find("Main Camera").gameObject.transform.position;
+			this.transform.Find("Main Camera").gameObject.transform.position += Vector3.up * 0.425f;
+
+			isCrouched = false;
+		}
+		else
+		{
+			Debug.Log("Avant"+transform.position.y);
+			this.transform.position += Vector3.down * 0.45f;
+			Debug.Log("Après"+transform.position.y);
+
+			this.gameObject.GetComponent<CapsuleCollider>().height -= 0.9f;
+
+			Vector3 cameraPos = this.transform.Find("Main Camera").gameObject.transform.position;
+			this.transform.Find("Main Camera").gameObject.transform.position += Vector3.down * 0.425f;
+
+			isCrouched = true;
+		}
+	}
 }
