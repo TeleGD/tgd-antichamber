@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 viewAngle;
     private Rigidbody body;
 
+	private bool isCrouched = false;
+	private float canJump = 0f;
+
+	public float sensitivity = 10f;
+
+
     private void Start()
     {
         body = GetComponent<Rigidbody>();
@@ -17,24 +23,37 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		float yVel = body.velocity.y;
+		Vector3 dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         dir = dir.sqrMagnitude > 1 ? dir.normalized : dir;
         dir *= walkSpeed;
         dir = transform.rotation * dir;
-        body.velocity = dir;
+		dir += Vector3.up * yVel;
+		body.velocity = dir;
     }
 
     void LateUpdate()
     {
         //entrée souris
-        viewAngle.x += Input.GetAxis("Mouse X");
-        viewAngle.y = Mathf.Clamp(viewAngle.y - Input.GetAxis("Mouse Y"), -80, 80);
+        viewAngle.x += Input.GetAxis("Mouse X")*sensitivity;
+        viewAngle.y = Mathf.Clamp(viewAngle.y - Input.GetAxis("Mouse Y")*sensitivity, -80, 80);
 
         //rotation de la vue
         transform.GetChild(0).localEulerAngles = new Vector3(viewAngle.y, 0, 0);
         transform.eulerAngles = new Vector3(0, viewAngle.x, 0);
 
-        if(Input.GetKeyDown(KeyCode.LeftAlt)) {
+		if (Input.GetButtonDown("Crouch"))
+		{
+			Crouch();
+		}
+
+		if (Input.GetButtonDown("Jump") && Time.time > canJump)
+		{
+			Jump();
+			canJump = Time.time + 1f;
+		}
+
+		if (Input.GetKeyDown(KeyCode.LeftAlt)) {
             Cursor.visible = !Cursor.visible;
         }
     }
@@ -42,5 +61,41 @@ public class PlayerController : MonoBehaviour
     public void RotatePlayer(float amount)
     {
         viewAngle.x += amount;
+        FindObjectOfType<Flashlight>().transform.eulerAngles += Vector3.up * amount;
     }
+
+	public void Crouch()
+	{
+		if (isCrouched)
+		{
+			this.transform.position += Vector3.up * 0.45f;
+
+			this.gameObject.GetComponent<CapsuleCollider>().height += 0.9f;
+
+			Vector3 cameraPos = this.transform.Find("Main Camera").gameObject.transform.position;
+			this.transform.Find("Main Camera").gameObject.transform.position += Vector3.up * 0.425f;
+
+			isCrouched = false;
+		}
+		else
+		{
+			Debug.Log("Avant"+transform.position.y);
+			this.transform.position += Vector3.down * 0.45f;
+			Debug.Log("Après"+transform.position.y);
+
+			this.gameObject.GetComponent<CapsuleCollider>().height -= 0.9f;
+
+			Vector3 cameraPos = this.transform.Find("Main Camera").gameObject.transform.position;
+			this.transform.Find("Main Camera").gameObject.transform.position += Vector3.down * 0.425f;
+
+			isCrouched = true;
+		}
+	}
+
+	public void Jump()
+	{
+		Debug.Log("there");
+		//this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 50, 0));
+		body.velocity += Vector3.up*5f;
+	}
 }
