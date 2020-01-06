@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
 	private float canJump = 0f;
 
 	public float sensitivity = 10f;
-
+    public float flashlightMoveIntensity = 5;
+    private Transform flashlight;
+    private Vector2 flashlightOffset;
 
     private void Start()
     {
         body = GetComponent<Rigidbody>();
         Cursor.visible = false;
+        flashlight = transform.GetChild(0).GetChild(0);
     }
 
     private void FixedUpdate()
@@ -35,12 +38,16 @@ public class PlayerController : MonoBehaviour
     void LateUpdate()
     {
         //entrée souris
-        viewAngle.x += Input.GetAxis("Mouse X")*sensitivity;
-        viewAngle.y = Mathf.Clamp(viewAngle.y - Input.GetAxis("Mouse Y")*sensitivity, -80, 80);
+        Vector2 mouseMove = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * sensitivity;
+        viewAngle.x += mouseMove.x;
+        viewAngle.y = Mathf.Clamp(viewAngle.y - mouseMove.y, -80, 80);
 
         //rotation de la vue
         transform.GetChild(0).localEulerAngles = new Vector3(viewAngle.y, 0, 0);
         transform.eulerAngles = new Vector3(0, viewAngle.x, 0);
+
+        flashlightOffset = Vector2.Lerp(flashlightOffset, mouseMove * flashlightMoveIntensity, Time.deltaTime * 4);
+        flashlight.localEulerAngles = new Vector3(-flashlightOffset.y, flashlightOffset.x, 0);
 
 		if (Input.GetButtonDown("Crouch"))
 		{
@@ -61,7 +68,6 @@ public class PlayerController : MonoBehaviour
     public void RotatePlayer(float amount)
     {
         viewAngle.x += amount;
-        FindObjectOfType<Flashlight>().transform.eulerAngles += Vector3.up * amount;
     }
 
 	public void Crouch()
