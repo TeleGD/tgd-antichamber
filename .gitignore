@@ -19,6 +19,9 @@
 # Visual Studio cache directory
 .vs/
 
+#Blender
+*.blend1
+
 # Gradle cache directory
 .gradle/
 

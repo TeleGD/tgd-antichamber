@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6998839549235989956}
   - component: {fileID: 4386994444954808355}
   m_Layer: 0
-  m_Name: Wall_1_a
+  m_Name: Wall Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &2227596266502615345
 Transform:
@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181167037385379086}
-  m_Mesh: {fileID: -3191703661110990882, guid: 5f953cee2f0b1354aa5790f274cb1503, type: 3}
+  m_Mesh: {fileID: 1046372542525993101, guid: 2ca1acfc2e93b7d4fa0d645f7f076cc9, type: 3}
 --- !u!23 &4386994444954808355
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -90,11 +90,11 @@ GameObject:
   - component: {fileID: 8770938001629903138}
   - component: {fileID: 5721187327177518122}
   m_Layer: 0
-  m_Name: Wall_1_b
+  m_Name: Wallpaper Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &34047970357362410
 Transform:
@@ -117,7 +117,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374783491146586321}
-  m_Mesh: {fileID: -676634775303207628, guid: 5f953cee2f0b1354aa5790f274cb1503, type: 3}
+  m_Mesh: {fileID: 7585619949511806126, guid: 2ca1acfc2e93b7d4fa0d645f7f076cc9, type: 3}
 --- !u!23 &5721187327177518122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1511680158685266508
 Transform:
@@ -202,11 +202,11 @@ GameObject:
   - component: {fileID: 3542665981277537582}
   - component: {fileID: 256550489756470713}
   m_Layer: 0
-  m_Name: Wall_1_d
+  m_Name: Wall Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &6823864229928095663
 Transform:
@@ -229,7 +229,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4340711570525203340}
-  m_Mesh: {fileID: 8587984352133360698, guid: 5f953cee2f0b1354aa5790f274cb1503, type: 3}
+  m_Mesh: {fileID: 1731536438482190752, guid: 2ca1acfc2e93b7d4fa0d645f7f076cc9, type: 3}
 --- !u!23 &256550489756470713
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -280,11 +280,11 @@ GameObject:
   - component: {fileID: 4785958471696400355}
   - component: {fileID: 8577738034081436193}
   m_Layer: 0
-  m_Name: Wall_1_c
+  m_Name: Wallpaper Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &7875579744414010865
 Transform:
@@ -307,7 +307,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7350797044256260177}
-  m_Mesh: {fileID: -2066659471189639598, guid: 5f953cee2f0b1354aa5790f274cb1503, type: 3}
+  m_Mesh: {fileID: -7473989837835096358, guid: 2ca1acfc2e93b7d4fa0d645f7f076cc9, type: 3}
 --- !u!23 &8577738034081436193
 MeshRenderer:
   m_ObjectHideFlags: 0
