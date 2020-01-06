@@ -10,7 +10,7 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player") && !(viewCondition != null && viewCondition.isVisible))
+        if(other.CompareTag("Player") && !(viewCondition != null && viewCondition.isVisible) && Time.timeSinceLevelLoad > 1)
             TeleportPlayer(other.transform);
     }
 

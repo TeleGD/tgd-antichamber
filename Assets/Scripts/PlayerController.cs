@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float flashlightMoveIntensity = 5;
     private Transform flashlight;
     private Vector2 flashlightOffset;
+    public float viewBobbingAmount = 2;
 
     private void Start()
     {
@@ -46,10 +47,18 @@ public class PlayerController : MonoBehaviour
         transform.GetChild(0).localEulerAngles = new Vector3(viewAngle.y, 0, 0);
         transform.eulerAngles = new Vector3(0, viewAngle.x, 0);
 
-        flashlightOffset = Vector2.Lerp(flashlightOffset, mouseMove * flashlightMoveIntensity, Time.deltaTime * 4);
-        flashlight.localEulerAngles = new Vector3(-flashlightOffset.y, flashlightOffset.x, 0);
+        //view bobbing
+        float amount = body.velocity.sqrMagnitude > 1 ? viewBobbingAmount : 0;
+        Vector3 viewBobbing = new Vector3(
+            -Mathf.Abs(Mathf.Cos(Time.time * 6)) * amount,
+            Mathf.Sin(Time.time * 6) * amount,
+            0);
 
-		if (Input.GetButtonDown("Crouch"))
+        flashlightOffset = Vector2.Lerp(flashlightOffset, mouseMove * flashlightMoveIntensity, Time.deltaTime * 4);
+        flashlight.localEulerAngles = new Vector3(-flashlightOffset.y, flashlightOffset.x, 0) + viewBobbing;
+
+
+        if (Input.GetButtonDown("Crouch"))
 		{
 			Crouch();
 		}
