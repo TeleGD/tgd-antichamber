@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 10;
+    public float jumpForce = 4;
 
     private Vector2 viewAngle;
     private Rigidbody body;
@@ -18,10 +19,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 flashlightOffset;
     public float viewBobbingAmount = 2;
 
+    private bool cursorLocked = true;
+
     private void Start()
     {
         body = GetComponent<Rigidbody>();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         flashlight = transform.GetChild(0).GetChild(0);
     }
 
@@ -70,7 +74,9 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown(KeyCode.LeftAlt)) {
-            Cursor.visible = !Cursor.visible;
+            cursorLocked = !cursorLocked;
+            Cursor.visible = !cursorLocked;
+            Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
         }
     }
 
@@ -109,8 +115,6 @@ public class PlayerController : MonoBehaviour
 
 	public void Jump()
 	{
-		Debug.Log("there");
-		//this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 50, 0));
-		body.velocity += Vector3.up*5f;
+		body.velocity += Vector3.up * jumpForce;
 	}
 }
