@@ -1,0 +1,3 @@
+- Clément Crouzet (@CrouzetC)
+- Stéphane Hulot (@stephane-hulot)
+- Timothée Wright (@TimotheeWright)
